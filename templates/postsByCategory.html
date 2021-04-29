@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title_page">Категория {{ category }}</h1>
+        {% if not posts %}
+            <h2 class="nothing_review">Ничего нету)</h2>
+        {% endif %}
+        {% for i in posts %}
+            <div class="post_block">
+                <p>Название: </p>
+                <i><a href="/posts/{{ i.id }}/" class="title_post">{{ i.title }}</a></i>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

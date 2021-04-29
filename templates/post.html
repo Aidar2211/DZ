@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="post">
+            <h1>{{ post.title }}</h1>
+            <h4>{{ post.description }}</h4>
+            <p class="price">{{ post.price }} сом</p>
+            <p>Дата создания: {{ post.created }}</p>
+        </div>
+        <hr>
+        {% if not reviews %}
+            <h2 class="nothing_review">Напишите первый отзыв!</h2>
+        {% endif %}
+        {% for i in reviews %}
+            <div class="review_block">
+                <p class="author">{{ i.author }}</p>
+                <p class="review_text">{{ i.text }}</p>
+            </div>
+            <hr>
+        {% endfor %}
+
+        <form action="/posts/{{ post.id }}/" method="post">
+            {% csrf_token %}
+            <input type="text" name="author" class="form-control" style="width: 300px" placeholder="Автор">
+            <br>
+            <textarea name="text" class="form-control" cols="10" rows="5" placeholder="Отзыв"></textarea>
+            <br>
+            <input class="btn btn-warning" type="submit">
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container add_post_container">
+        <h1 class="title_page">Добавить Пост</h1>
+        <form action="/add_post/" method="post">
+            {% csrf_token %}
+            <input class="form-control" type="text" name="title" placeholder="Название" required>
+            <br>
+            <textarea name="description"
+                      class="form-control"
+                      rows="5"
+                      placeholder="Описание" required></textarea>
+            <br>
+            <select name="category" class="form-control" required>
+                {% for i in categories %}
+                    <option value="{{ i.name }}">{{ i.name }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <input type="number" class="form-control" name="price" placeholder="Цена" required>
+            <br>
+            <input type="submit" class="btn btn-warning">
+        </form>
+    </div>
+{% endblock %}

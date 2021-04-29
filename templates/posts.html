@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container">
+    <h1 class="title_page">Посты</h1>
+        {% for i in posts %}
+            <div class="post_block">
+                <p>Название: </p>
+                <i><a href="{{ i.id }}/" class="title_post">{{ i.title }}</a></i>
+            </div>
+        {% endfor %}
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+              {% if previous != 'disabled' %}
+                <li class="page-item"><a class="page-link" href="/posts/?page={{previous}}">
+                    Previous</a></li>
+              {% else %}
+                <li class="page-item disabled"><a class="page-link" href="/posts/?page=">
+                    Previous</a></li>
+              {% endif %}
+
+              {% for i in pagesCount%}
+                {% if i == thisPage %}
+                    <li class="page-item" style="color: red">
+                        <a
+                                style="font-size: 20px; color: red"
+                                class="page-link" href="/posts/?page={{ i }}">
+                        {{ i }}
+                    </a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="/posts/?page={{ i }}">
+                        {{ i }}
+                    </a></li>
+                {% endif %}
+              {% endfor %}
+
+              {% if lastPage %}
+                {% if lastPage == thisPage %}
+                    <li class="page-item">
+                        <a
+                            style="font-size: 20px; color: red"
+                            class="page-link" href="/posts/?page={{lastPage}}">
+                        {{ lastPage }}
+                        </a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="/posts/?page={{lastPage}}">
+                        {{ lastPage }}
+                        </a></li>
+                {% endif %}
+              {% endif %}
+
+              {% if next != 'disabled' %}
+                <li class="page-item"><a class="page-link" href="/posts/?page={{next}}">Next</a></li>
+              {% else %}
+                <li class="page-item disabled"><a class="page-link" href="/posts/?page=">Next</a></li>
+              {% endif %}
+          </ul>
+        </nav>
+    </div>
+{% endblock %}

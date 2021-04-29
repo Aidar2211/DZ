@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="title_page">Регистрация</h1>
+        <form style="color: white !important;" action="/register/" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br>
+            <input type="submit" class="btn btn-warning">
+        </form>
+    </div>
+{% endblock %}

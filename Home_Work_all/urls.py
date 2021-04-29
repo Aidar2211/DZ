@@ -1,0 +1,33 @@
+"""Home_Work_all URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path
+from blog import views as blogViews
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', blogViews.get_main),
+    path('posts/', blogViews.get_posts),
+    path('posts/<int:id>/', blogViews.get_post),
+    path('add_post/', blogViews.add_post),
+    path('posts/<str:category_name>/', blogViews.get_by_category),
+    path('add_category/', blogViews.add_category),
+    path('register/', blogViews.register),
+    path('login/', blogViews.login),
+    path('logout/', blogViews.logout)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
